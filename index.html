@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMU Förderprogramme - Deutschland</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .cta-banner {
+            background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .cta-banner h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .cta-banner p {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: white;
+            color: #2e7d32;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button-alt {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .update-notice {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 40px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .update-notice strong {
+            color: #856404;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .filters {
+            padding: 30px 40px;
+            background: #fff;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .programs {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid #667eea;
+        }
+
+        .program-card.unavailable {
+            opacity: 0.6;
+            border-left-color: #dc3545;
+        }
+
+        .program-card.partial {
+            border-left-color: #ffc107;
+        }
+
+        .program-card.upcoming {
+            border-left-color: #17a2b8;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .program-card.hidden {
+            display: none;
+        }
+
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .program-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2d3748;
+            flex: 1;
+        }
+
+        .state-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        .state-ST { background: #e3f2fd; color: #1976d2; }
+        .state-SN { background: #f3e5f5; color: #7b1fa2; }
+        .state-NI { background: #fff3e0; color: #e65100; }
+        .state-TH { background: #e8f5e9; color: #388e3c; }
+        .state-BE { background: #fce4ec; color: #c2185b; }
+
+        .type-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .type-zuschuss { background: #d1f4e0; color: #0f5132; }
+        .type-darlehen { background: #cfe2ff; color: #084298; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .status-unavailable {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .status-partial {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-upcoming {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .program-description {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        .program-details {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .detail-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .funding-bar {
+            margin-top: 10px;
+        }
+
+        .bar-label {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .bar-container {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .program-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .program-link:hover {
+            background: #764ba2;
+        }
+
+        .program-link.disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .mini-cta {
+            background: #f0f7ff;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .mini-cta p {
+            font-size: 0.9em;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .mini-cta a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .mini-cta a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .programs {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 KMU Förderprogramme Deutschland</h1>
+            <p>Aktuelle Fördermöglichkeiten für kleine und mittlere Unternehmen</p>
+        </header>
+        
+        <div class="cta-banner">
+            <h2>💡 Kostenlose Förderberatung sichern!</h2>
+            <p>Unsicher, welches Programm passt? Wir helfen Ihnen bei der Auswahl und Antragsstellung!</p>
+            <div class="cta-buttons">
+                <a href="https://calendly.com/michel-neumann" target="_blank" class="cta-button">
+                    📅 Termin mit Michel Neumann
+                </a>
+                <a href="https://calendly.com/tim-lueth/erstgespraech" target="_blank" class="cta-button cta-button-alt">
+                    📅 Termin mit Tim Lüth
+                </a>
+            </div>
+        </div>
+
+        <div class="update-notice">
+            <strong>📅 Letzte Aktualisierung: 11.02.2026</strong><br>
+            Alle Programme auf aktuellem Stand | KLUG Thüringen neu hinzugefügt | INVESTIERT & Status-Korrekturen durchgeführt
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number" id="total-programs">21</div>
+                <div class="stat-label">Förderprogramme</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Bundesländer</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="grant-count">15</div>
+                <div class="stat-label">Zuschüsse</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="loan-count">6</div>
+                <div class="stat-label">Darlehen</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Bundesland:</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" data-type="state">Alle</button>
+                    <button class="filter-btn" data-filter="ST" data-type="state">Sachsen-Anhalt</button>
+                    <button class="filter-btn" data-filter="SN" data-type="state">Sachsen</button>
+                    <button class="filter-btn" data-filter="BE" data-type="state">Berlin 🆕</button>
+                    <button class="filter-btn" data-filter="NI" data-type="state">Niedersachsen</button>
+                    <button class="filter-btn" data-filter="TH" data-type="state">Thüringen</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>Förderart:</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all" data-type="funding">Alle</button>
+                    <button class="filter-btn" data-filter="zuschuss" data-type="funding">Zuschuss</button>
+                    <button class="filter-btn" data-filter="darlehen" data-type="funding">Darlehen</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="programs" id="programs-container">
+            <!-- Programme werden hier eingefügt -->
+        </div>
+
+        <footer>
+            <p>© 2026 KMU Förderübersicht | Daten ohne Gewähr | Stand: 11.02.2026</p>
+            <p style="margin-top: 10px;">
+                <a href="https://calendly.com/michel-neumann" target="_blank" style="color: #a8b3ff; text-decoration: none; margin: 0 10px;">Termin Michel</a> |
+                <a href="https://calendly.com/tim-lueth/erstgespraech" target="_blank" style="color: #a8b3ff; text-decoration: none; margin: 0 10px;">Termin Tim</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const programs = [
+            // SACHSEN-ANHALT - ZUSCHÜSSE
+            {
+                name: "Digital Innovation",
+                state: "ST",
+                type: "zuschuss",
+                funding_rate: 50,
+                max_amount: "70.000 €",
+                min_amount: "3.000 €",
+                description: "Förderung der Digitalisierung von Produkten, Prozessen, Geschäftsmodellen und IT-Sicherheit",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/digitalisieren/digital-innovation",
+                available: true,
+                status: "6. Runde H1/2026",
+                statusClass: "upcoming"
+            },
+            {
+                name: "Digital Creativity",
+                state: "ST",
+                type: "zuschuss",
+                funding_rate: 75,
+                max_amount: "130.000 €",
+                min_amount: "25.000 €",
+                description: "Entwicklung innovativer digitaler Anwendungen wie Games, Apps, crossmediale Projekte",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/digitalisieren/digital-creativity",
+                available: true
+            },
+            {
+                name: "Sachsen-Anhalt Digital",
+                state: "ST",
+                type: "zuschuss",
+                funding_rate: 90,
+                max_amount: "120.000 €",
+                min_amount: "5.000 €",
+                description: "Landesweite Digitalisierungsprojekte zur Umsetzung der Strategie 'Sachsen-Anhalt Digital 2030'",
+                link: "https://mid.sachsen-anhalt.de/digitales/strategie-sachsen-anhalt-digital-2030/foerderrichtlinie-sachsen-anhalt-digital-ministerium-fuer-infrastruktur-und-digitales",
+                available: false,
+                status: "Ausgeschöpft",
+                statusClass: "unavailable"
+            },
+            {
+                name: "Forschung und Entwicklung",
+                state: "ST",
+                type: "zuschuss",
+                funding_rate: 50,
+                max_amount: "500.000 €",
+                min_amount: "200.000 €",
+                description: "FuE-Projekte für industrielle Forschung (50%) und experimentelle Entwicklung (25%), Wissens- und Technologietransfer",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/innovation/forschung-und-entwicklung",
+                available: true
+            },
+            {
+                name: "INVESTIERT",
+                state: "ST",
+                type: "zuschuss",  // KORRIGIERT!
+                funding_rate: 35,  // KORRIGIERT!
+                max_amount: "300.000 €",  // KORRIGIERT!
+                min_amount: null,
+                description: "Zuschuss für gewerbliche Investitionen und Unternehmensfinanzierung. Bis zu 35% der förderfähigen Ausgaben.",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/investieren-finanzieren/investiert",
+                available: false,  // KORRIGIERT!
+                status: "Ausgelaufen",
+                statusClass: "unavailable"
+            },
+            
+            // SACHSEN-ANHALT - DARLEHEN
+            {
+                name: "IB-Mittelstandsdarlehen",
+                state: "ST",
+                type: "darlehen",
+                funding_rate: null,
+                max_amount: "3.000.000 €",
+                min_amount: "25.000 €",
+                description: "Zinsgünstiges Darlehen für Investitionen, Betriebsmittel und Auftragsvorfinanzierung (Laufzeit bis 15 Jahre)",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/investieren-finanzieren/ib-mittelstandsdarlehen-2021-2027",
+                available: true
+            },
+            {
+                name: "IB-Mezzaninedarlehen",
+                state: "ST",
+                type: "darlehen",
+                funding_rate: null,
+                max_amount: "Variabel",
+                min_amount: "Variabel",
+                description: "Eigenkapitalähnliches Nachrangdarlehen zur Stärkung der Eigenkapitalbasis von KMU",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/investieren-finanzieren/ib-mezzaninedarlehen-fuer-kmu",
+                available: true
+            },
+            {
+                name: "WEITERBILDUNG (betrieblich)",
+                state: "ST",
+                type: "zuschuss",
+                funding_rate: 80,
+                max_amount: "100.000 €",
+                min_amount: "Variabel",
+                description: "Förderung betrieblicher Weiterbildungsmaßnahmen: Teilnahme-/Prüfungsgebühren, Honorare, Fahrtkosten, Kinderbetreuung",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/aus-weiterbildung/weiterbildung-betrieblich",
+                available: true
+            },
+            {
+                name: "Meistergründungsprämie",
+                state: "ST",
+                type: "zuschuss",
+                funding_rate: null,
+                max_amount: "10.000 €",
+                min_amount: "10.000 €",
+                description: "Einmaliger Zuschuss für Handwerksmeister zur Existenzgründung (Betriebsneugründung oder Übernahme)",
+                link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/gruenden/meistergruendungspraemie",
+                available: true
+            },
+            
+            // SACHSEN
+            {
+                name: "Digitalisierung Zuschuss",
+                state: "SN",
+                type: "zuschuss",
+                funding_rate: 60,
+                max_amount: "60.000 €",
+                min_amount: "5.000 €",
+                description: "Digitalisierung von Betriebsprozessen (Heranführungs- und Transformationsprojekte: 35-60% je nach Größe)",
+                link: "https://www.sab.sachsen.de/förderrichtlinie-digitalisierung-zuschuss-efre-2021-bis-2027",
+                available: true
+            },
+            {
+                name: "Markteinführung Innovation",
+                state: "SN",
+                type: "zuschuss",
+                funding_rate: 40,
+                max_amount: "Variabel",
+                min_amount: "5.000 €",
+                description: "Zuschuss zur Markteinführung innovativer Produkte, Verfahren oder Dienstleistungen",
+                link: "https://sab.sachsen.de/förderrichtlinie-markteinführung-innovativer-produkte-verfahren-oder-dienstleistungen-zuschuss-efre-2021-bis-2027",
+                available: true
+            },
+            {
+                name: "Regionales Wachstum",
+                state: "SN",
+                type: "zuschuss",
+                funding_rate: 50,
+                max_amount: "Variabel",
+                min_amount: "Variabel",
+                description: "Investitionsförderung (JTF-Programm verfügbar in Strukturwandelregionen, Landesprogramm derzeit ausgesetzt)",
+                link: "https://sab.sachsen.de/regionales-wachstum",
+                available: true,
+                status: "Teilweise",
+                statusClass: "partial"
+            },
+            
+            // BERLIN - ZUSCHÜSSE
+            {
+                name: "Pro FIT Zuschuss",
+                state: "BE",
+                type: "zuschuss",
+                funding_rate: 80,
+                max_amount: "500.000 €",
+                min_amount: "Variabel",
+                description: "Zuschuss für F&E-Projekte (industrielle Forschung, experimentelle Entwicklung). Kleine Unternehmen bis 80%, mittlere bis 60%",
+                link: "https://www.ibb.de/de/foerderprogramme/pro-fit-projektfinanzierung.html",
+                available: true
+            },
+            {
+                name: "PfI KMU-Projekte",
+                state: "BE",
+                type: "zuschuss",
+                funding_rate: 50,
+                max_amount: "12.000 €",
+                min_amount: "3.000 €",
+                description: "Internationalisierung: Messebeteiligung, Ausstellungen, Kongresse. 50% Zuschuss für Unternehmen mit innovativen Produkten",
+                link: "https://www.ibb.de/de/foerderprogramme/pfi-foerderung-von-kmu-projekten.html",
+                available: true
+            },
+            {
+                name: "GRW Investitionszuschuss",
+                state: "BE",
+                type: "zuschuss",
+                funding_rate: 30,
+                max_amount: "Variabel",
+                min_amount: "Variabel",
+                description: "Bis zu 30% Zuschuss für Ansiedlungen, Erweiterungen, Transformation. Bonus +5% für nachhaltige Investitionen",
+                link: "https://www.ibb.de/de/wirtschaftsfoerderung/foerderprogramme-a-z/foerderprogramme-a-z.html",
+                available: true
+            },
+            
+            // BERLIN - DARLEHEN
+            {
+                name: "Pro FIT Darlehen",
+                state: "BE",
+                type: "darlehen",
+                funding_rate: null,
+                max_amount: "1.000.000 €",
+                min_amount: "Variabel",
+                description: "Zinsverbilligtes Darlehen für F&E-Projekte (kombinierbar mit Pro FIT Zuschuss). Neue Richtlinien seit 01.01.2026",
+                link: "https://www.ibb.de/de/foerderprogramme/pro-fit-projektfinanzierung.html",
+                available: true
+            },
+            {
+                name: "KMU-Fonds Gründung & Wachstum",
+                state: "BE",
+                type: "darlehen",
+                funding_rate: null,
+                max_amount: "10.000.000 €",
+                min_amount: "5.000 €",
+                description: "Gründungsdarlehen bis 250k€, Wachstumsdarlehen bis 10M€. Flexible Laufzeiten mit tilgungsfreier Anlaufzeit",
+                link: "https://www.ibb.de/de/wirtschaftsfoerderung/foerderprogramme-a-z/foerderprogramme-a-z.html",
+                available: true
+            },
+            
+            // NIEDERSACHSEN
+            {
+                name: "NBank-Kredit",
+                state: "NI",
+                type: "darlehen",
+                funding_rate: null,
+                max_amount: "Variabel",
+                min_amount: "Variabel",
+                description: "Zinsgünstige Finanzierung für Unternehmen in Niedersachsen",
+                link: "https://www.nbank.de/",
+                available: true
+            },
+            
+            // THÜRINGEN - ZUSCHÜSSE
+            {
+                name: "KLUG",
+                state: "TH",
+                type: "zuschuss",
+                funding_rate: 45,
+                max_amount: "Variabel",
+                min_amount: "Variabel",
+                description: "Förderung von Kleinstunternehmen der Grundversorgung (Lebensmittel, Gesundheit, Pflege, Gastronomie). 45% Zuschuss für Investitionen",
+                link: "https://www.aufbaubank.de/foerderprogramme/klug-foerderung-von-kleinstunternehmen-der-grundversorgung",
+                available: true,
+                new: true
+            },
+            {
+                name: "Digitalbonus",
+                state: "TH",
+                type: "zuschuss",
+                funding_rate: 50,
+                max_amount: "15.000 €",
+                min_amount: "5.000 €",
+                description: "Digitalisierung von Betriebsprozessen, Produkten und IT-Sicherheit",
+                link: "https://www.aufbaubank.de/Foerderprogramme/Digitalbonus-Thueringen",
+                available: false,
+                status: "Ausgeschöpft",
+                statusClass: "unavailable"
+            },
+            {
+                name: "InnoInvest",
+                state: "TH",
+                type: "zuschuss",
+                funding_rate: 50,
+                max_amount: "200.000 €",
+                min_amount: "5.000 €",
+                description: "Förderung innovativer Investitionen in materielle und immaterielle Wirtschaftsgüter (Pauschalen: 25k-200k €)",
+                link: "https://www.aufbaubank.de/Foerderprogramme/InnoInvest",
+                available: true
+            },
+            
+            // THÜRINGEN - DARLEHEN
+            {
+                name: "Thüringen Dynamik",
+                state: "TH",
+                type: "darlehen",
+                funding_rate: null,
+                max_amount: "4.000.000 €",
+                min_amount: "5.000 €",
+                description: "Zinsgünstige Investitionsdarlehen für innovative KMU-Vorhaben",
+                link: "https://www.aufbaubank.de/Foerderprogramme/Thueringen-Dynamik",
+                available: true
+            }
+        ];
+
+        const container = document.getElementById('programs-container');
+        let currentStateFilter = 'all';
+        let currentFundingFilter = 'all';
+
+        function renderPrograms() {
+            container.innerHTML = '';
+            
+            programs.forEach(program => {
+                if (currentStateFilter !== 'all' && program.state !== currentStateFilter) {
+                    return;
+                }
+                if (currentFundingFilter !== 'all' && program.type !== currentFundingFilter) {
+                    return;
+                }
+
+                const card = document.createElement('div');
+                let cardClass = 'program-card';
+                if (!program.available) {
+                    cardClass += ' unavailable';
+                } else if (program.statusClass === 'partial') {
+                    cardClass += ' partial';
+                } else if (program.statusClass === 'upcoming') {
+                    cardClass += ' upcoming';
+                }
+                card.className = cardClass;
+                card.setAttribute('data-state', program.state);
+                card.setAttribute('data-type', program.type);
+
+                let statusBadge = '';
+                if (!program.available) {
+                    statusBadge = `<span class="status-badge status-unavailable">⚠️ ${program.status || 'Nicht verfügbar'}</span>`;
+                } else if (program.statusClass === 'upcoming') {
+                    statusBadge = `<span class="status-badge status-upcoming">📅 ${program.status}</span>`;
+                } else if (program.status) {
+                    statusBadge = `<span class="status-badge status-${program.statusClass}">ℹ️ ${program.status}</span>`;
+                } else if (program.new) {
+                    statusBadge = `<span class="status-badge" style="background: #d1f4e0; color: #0f5132;">🆕 NEU</span>`;
+                }
+
+                const ctaHtml = `
+                    <div class="mini-cta">
+                        <p>💡 <strong>Passt dieses Programm zu Ihrem Projekt?</strong></p>
+                        <a href="https://calendly.com/michel-neumann" target="_blank">Termin mit Michel buchen</a> |
+                        <a href="https://calendly.com/tim-lueth/erstgespraech" target="_blank">Termin mit Tim buchen</a>
+                    </div>
+                `;
+
+                card.innerHTML = `
+                    <div class="program-header">
+                        <div class="program-title">${program.name}${statusBadge}</div>
+                        <span class="state-badge state-${program.state}">${getStateName(program.state)}</span>
+                    </div>
+                    <span class="type-badge type-${program.type}">${program.type === 'zuschuss' ? '💰 Zuschuss' : '🏦 Darlehen'}</span>
+                    <p class="program-description">${program.description}</p>
+                    <div class="program-details">
+                        ${program.funding_rate ? `
+                            <div class="detail-item">
+                                <span class="detail-label">Fördersatz:</span>
+                                <span class="detail-value">${program.funding_rate}%</span>
+                            </div>
+                            <div class="funding-bar">
+                                <div class="bar-label">Förderanteil</div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: ${program.funding_rate}%"></div>
+                                </div>
+                            </div>
+                        ` : ''}
+                        <div class="detail-item">
+                            <span class="detail-label">Max. Betrag:</span>
+                            <span class="detail-value">${program.max_amount}</span>
+                        </div>
+                        ${program.min_amount ? `
+                            <div class="detail-item">
+                                <span class="detail-label">Min. Betrag:</span>
+                                <span class="detail-value">${program.min_amount}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <a href="${program.link}" target="_blank" class="program-link ${!program.available ? 'disabled' : ''}" 
+                       ${!program.available ? 'onclick="return false;"' : ''}>
+                        ${!program.available ? '📋 Programminfo' : '🔗 Zum Programm'}
+                    </a>
+                    ${program.available ? ctaHtml : ''}
+                `;
+
+                container.appendChild(card);
+            });
+
+            updateStats();
+        }
+
+        function getStateName(code) {
+            const states = {
+                'ST': 'Sachsen-Anhalt',
+                'SN': 'Sachsen',
+                'BE': 'Berlin',
+                'NI': 'Niedersachsen',
+                'TH': 'Thüringen'
+            };
+            return states[code];
+        }
+
+        function updateStats() {
+            const visible = programs.filter(p => {
+                if (currentStateFilter !== 'all' && p.state !== currentStateFilter) return false;
+                if (currentFundingFilter !== 'all' && p.type !== currentFundingFilter) return false;
+                return true;
+            });
+
+            document.getElementById('total-programs').textContent = visible.length;
+            document.getElementById('grant-count').textContent = visible.filter(p => p.type === 'zuschuss').length;
+            document.getElementById('loan-count').textContent = visible.filter(p => p.type === 'darlehen').length;
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filterType = this.getAttribute('data-type');
+                const filterValue = this.getAttribute('data-filter');
+
+                document.querySelectorAll(`.filter-btn[data-type="${filterType}"]`).forEach(b => {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                if (filterType === 'state') {
+                    currentStateFilter = filterValue;
+                } else {
+                    currentFundingFilter = filterValue;
+                }
+
+                renderPrograms();
+            });
+        });
+
+        renderPrograms();
+    </script>
+</body>
+</html>
