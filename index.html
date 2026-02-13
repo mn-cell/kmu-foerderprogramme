@@ -25,14 +25,6 @@
             min-height: 100vh;
         }
 
-        .container { 
-            width: 98%; 
-            max-width: 1900px; 
-            margin: -70px auto 40px; 
-            padding: 0 10px; 
-            flex: 1; 
-        }
-
         .logo-section { background: var(--white); padding: 15px; text-align: center; border-bottom: 3px solid var(--secondary); }
         .logo { max-width: 220px; }
 
@@ -41,6 +33,14 @@
             color: var(--white); 
             padding: 60px 20px 110px 20px; 
             text-align: center;
+        }
+
+        .container { 
+            width: 98%; 
+            max-width: 1900px; 
+            margin: -70px auto 40px; 
+            padding: 0 10px; 
+            flex: 1; 
         }
 
         .filter-nav { 
@@ -151,7 +151,6 @@
     <div style="margin-bottom: 15px;">
         <a href="https://elbconcept.de/impressum" target="_blank">Impressum</a>
         <a href="https://elbconcept.de/datenschutz" target="_blank">Datenschutz</a>
-        <a href="https://elbconcept.de/registrierung" target="_blank">Registrierung</a>
     </div>
     <p style="opacity: 0.6;">&copy; 2026 ElbConcept GmbH. Alle Angaben ohne Gewähr.</p>
 </footer>
@@ -159,34 +158,31 @@
 <script>
     const programs = [
         // SACHSEN-ANHALT (ST)
-        { state: "ST", name: "Digital Innovation", type: "💰 Zuschuss", rate: "50%", max: "70.000 €", desc: "Digitalisierung von Produkten & Prozessen sowie Einführung moderner IT-Infrastruktur.", ex: "Bsp: Einführung eines ERP-Systems oder Cloud-Lösungen.", link: "https://www.ib-sachsen-anhalt.de" },
-        { state: "ST", name: "Digital Creativity", type: "💰 Zuschuss", rate: "75%", max: "130.000 €", desc: "Entwicklung von innovativen digitalen Inhalten wie Games oder Apps.", ex: "Bsp: Entwicklung einer neuen Lern-App oder VR-Anwendung.", link: "https://www.ib-sachsen-anhalt.de" },
-        { state: "ST", name: "Sachsen-Anhalt MEDIENPRO", type: "💰 Zuschuss", rate: "Variabel", max: "Auf Anfrage", desc: "NEU 2026: Unterstützung für innovative Medienproduktionen und Audio-Formate.", ex: "Bsp: Produktion einer Podcast-Serie oder Videocontent.", link: "#" },
-        { state: "ST", name: "WEITERBILDUNG (betrieblich)", type: "💰 Zuschuss", rate: "bis 90%", max: "Variabel", desc: "Qualifizierung von Beschäftigten zur Steigerung der Wettbewerbsfähigkeit.", ex: "Bsp: Fortbildung zum Digitalisierungs-Manager.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/aus-weiterbildung/weiterbildung-betrieblich" },
-        { state: "ST", name: "Forschung & Entwicklung (Personal)", type: "💰 Zuschuss", rate: "bis 60%", max: "500.000 €", desc: "Zuschuss zu Lohnkosten für Mitarbeiter in Innovationsprojekten.", ex: "Bsp: Gehalt für Entwickler eines neuen Bauteils.", link: "#" },
-        { state: "ST", name: "Forschung & Entwicklung (Projekt)", type: "💰 Zuschuss", rate: "bis 50%", max: "Variabel", desc: "Unterstützung für industrielle Forschung und experimentelle Entwicklung.", ex: "Bsp: Bau eines Prototyps einer neuen Maschine.", link: "#" },
-        { state: "ST", name: "Sachsen-Anhalt INVESTIERT", type: "💰 Zuschuss", rate: "bis 35%", max: "300.000 €", desc: "Zuschuss für gewerbliche Investitionen in Anlagevermögen.", ex: "Bsp: Kauf einer neuen CNC-Fräse oder Hallenbau.", link: "#" },
-        { state: "ST", name: "Energie & Umwelt", type: "💰 Zuschuss", rate: "30%", max: "1 Mio. €", desc: "Effizienzmaßnahmen zur Reduzierung von CO2 und Energieverbrauch.", ex: "Bsp: Neue LED-Beleuchtung oder Wärmerückgewinnung.", link: "#" },
-        { state: "ST", name: "Sachsen-Anhalt IMPULS", type: "🏦 Darlehen", rate: "Zinsgünstig", max: "500.000 €", desc: "Finanzierung von Wachstumsvorhaben und Betriebsmitteln.", ex: "Bsp: Kauf von Waren für Großauftrag.", link: "#" },
-        { state: "ST", name: "IB-Mittelstandsdarlehen", type: "🏦 Darlehen", rate: "Festzins", max: "5 Mio. €", desc: "Große Investitionsvorhaben und Unternehmensübernahmen.", ex: "Bsp: Kauf eines Konkurrenzunternehmens.", link: "#" },
+        { state: "ST", name: "Digital Innovation", type: "💰 Zuschuss", rate: "50%", max: "70.000 €", desc: "Digitalisierung von Produkten & Prozessen sowie Einführung moderner IT-Infrastruktur.", ex: "Bsp: Einführung eines ERP-Systems oder Cloud-Lösungen.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/digitalisieren/digital-innovation/" },
+        { state: "ST", name: "Digital Creativity", type: "💰 Zuschuss", rate: "75%", max: "130.000 €", desc: "Entwicklung von innovativen digitalen Inhalten wie Games oder Apps.", ex: "Bsp: Entwicklung einer neuen Lern-App oder VR-Anwendung.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/digitalisieren/digital-creativity" },
+        { state: "ST", name: "Sachsen-Anhalt MEDIENPRO", type: "💰 Zuschuss", rate: "bis zu 90%", max: "Variabel", desc: "Unterstützung für innovative Medienproduktionen und Audio-Formate.", ex: "Bsp: Produktion einer Podcast-Serie oder Videocontent.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/kreativitaet/medienpro" },
+        { state: "ST", name: "WEITERBILDUNG (betrieblich)", type: "💰 Zuschuss", rate: "bis zu 80%", max: "100.000 €", desc: "Qualifizierung von Beschäftigten zur Steigerung der Wettbewerbsfähigkeit.", ex: "Bsp: Fortbildung zum Digitalisierungs-Manager.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/aus-weiterbildung/weiterbildung-betrieblich" },
+        { state: "ST", name: "Forschung & Entwicklung (Personal)", type: "💰 Zuschuss", rate: "bis zu 60%", max: "500.000 €", desc: "Zuschuss zu Lohnkosten für Mitarbeiter in Innovationsprojekten.", ex: "Bsp: Gehalt für Entwickler eines neuen Bauteils.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/innovation/forschung-und-entwicklung" },
+        { state: "ST", name: "Sachsen-Anhalt INVESTIERT", type: "💰 Zuschuss", rate: "bis 35%", max: "300.000 €", desc: "Zuschuss für gewerbliche Investitionen in Anlagevermögen.", ex: "Bsp: Kauf einer neuen CNC-Fräse oder Hallenbau.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/investieren-finanzieren/investiert" },
+        { state: "ST", name: "Energie & Umwelt", type: "💰 Zuschuss", rate: "bis zu 50%", max: "1 Mio. €", desc: "Effizienzmaßnahmen zur Reduzierung von CO2 und Energieverbrauch.", ex: "Bsp: Neue LED-Beleuchtung oder Wärmerückgewinnung.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/energie-umwelt/energie" },
+ 	{ state: "ST", name: "GRW Unternehmensförderung", type: "💰 Zuschuss", rate: "bis zu 35%", max: "Variabel", desc: "Sachanlageinvestitionen zur Sicherung/ Schaffgung von Dauerarbeitsplätzen.", ex: "Bsp: Kauf einer neuen Produktionsanlage.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/investieren-finanzieren/grw-unternehmensfoerderung/grw-unternehmensfoerderung" },
+        { state: "ST", name: "IB-Mittelstandsdarlehen", type: "🏦 Darlehen", rate: "Festzins", max: "3 Mio. €", desc: "Große Investitionsvorhaben und Unternehmensübernahmen.", ex: "Bsp: Expansion und Betriebsmittel.", link: "https://www.ib-sachsen-anhalt.de/de/unternehmen/investieren-finanzieren/ib-mittelstandsdarlehen-2021-2027" },
         
         // THÜRINGEN (TH)
-        { state: "TH", name: "KLUG 🆕 NEU", type: "💰 Zuschuss", rate: "45%", max: "Variabel", desc: "Förderung von Kleinstunternehmen der Grundversorgung (Lebensmittel, Gastronomie).", ex: "Bsp: Modernisierung eines Dorfcafés.", link: "https://www.aufbaubank.de" },
-        { state: "TH", name: "Digitalbonus Thüringen", type: "💰 Zuschuss", rate: "50%", max: "15.000 €", desc: "Unterstützung für Digitalisierungsprojekte und IT-Sicherheit.", ex: "Bsp: Neues digitales Kassensystem.", link: "https://www.aufbaubank.de" },
-        { state: "TH", name: "Thüringen Dynamik", type: "🏦 Darlehen", rate: "Top-Zins", max: "2 Mio. €", desc: "Zinsgünstiges Darlehen für Investitionen und Betriebsmittel.", ex: "Bsp: Anschaffung neuer Fuhrpark-Fahrzeuge.", link: "#" },
+        { state: "TH", name: "KLUG 🆕 NEU", type: "💰 Zuschuss", rate: "45%", max: "13.500 €", desc: "Förderung von Kleinstunternehmen der Grundversorgung.", ex: "Bsp: Modernisierung eines Dorfcafés.", link: "https://www.aufbaubank.de/foerderprogramme/klug-foerderung-von-kleinstunternehmen-der-grundversorgung" },
+                { state: "TH", name: "Thüringen Dynamik", type: "🏦 Darlehen", rate: "Top-Zins", max: "4 Mio. €", desc: "Zinsgünstiges Darlehen für Investitionen und Betriebsmittel.", ex: "Bsp: Anschaffung neuer Fuhrpark-Fahrzeuge.", link: "https://www.aufbaubank.de/Foerderprogramme/Thueringen-Dynamik" },
         
         // SACHSEN (SN)
-        { state: "SN", name: "Digitalbonus Sachsen", type: "💰 Zuschuss", rate: "50%", max: "60.000 €", desc: "Zuschuss für Hardware, Software und Digital-Dienstleistungen.", ex: "Bsp: Neue Workstations für CAD-Anwendungen.", link: "https://www.sab.sachsen.de" },
-        { state: "SN", name: "GRW Investition Sachsen", type: "💰 Zuschuss", rate: "bis 30%", max: "Variabel", desc: "Unterstützung für Kapazitätserweiterungen und neue Betriebsstätten.", ex: "Bsp: Bau einer zweiten Produktionshalle.", link: "#" },
-        { state: "SN", name: "Sachsen-Kredit (GuW)", type: "🏦 Darlehen", rate: "Günstig", max: "2 Mio. €", desc: "Förderdarlehen für Gründung und Wachstum.", ex: "Bsp: Startfinanzierung für neues Standbein.", link: "#" },
+        { state: "SN", name: "Digitalisierung Zuschuss EFRE 2021-2027", type: "💰 Zuschuss", rate: "560%", max: "45.000 €", desc: "Zuschuss für Hardware, Software und Digital-Dienstleistungen.", ex: "Bsp: Neue Workstations.", link: "https://www.sab.sachsen.de/f%C3%B6rderrichtlinie-digitalisierung-zuschuss-efre-2021-bis-2027" },
+        { state: "SN", name: "GRW Investition Sachsen", type: "💰 Zuschuss", rate: "bis 35%", max: "Variabel", desc: "Unterstützung für Kapazitätserweiterungen.", ex: "Bsp: Bau einer zweiten Produktionshalle.", link: "https://www.sab.sachsen.de/gemeinschaftsaufgabe-verbesserung-der-regionalen-wirtschaftsstruktur-richtlinie-grw-riga" },
+        { state: "SN", name: "Sachsen-Kredit (GuW)", type: "🏦 Darlehen", rate: "Günstig", max: "2 Mio. €", desc: "Förderdarlehen für Gründung und Wachstum.", ex: "Bsp: Startfinanzierung für neues Standbein.", link: "https://www.sab.sachsen.de/sab-sachsenkredit-gr%C3%BCnden-und-wachsen-n" },
         
         // BERLIN (BE)
-        { state: "BE", name: "Gründungsbonus Berlin", type: "💰 Zuschuss", rate: "100%", max: "50.000 €", desc: "Anschubfinanzierung für innovative Startups in der Hauptstadt.", ex: "Bsp: Miete und Gehälter in der Startphase.", link: "https://www.ibb.de" },
-        { state: "BE", name: "Transfer BONUS Berlin", type: "💰 Zuschuss", rate: "70%", max: "45.000 €", desc: "Wissenstransfer zwischen Hochschulen und Wirtschaft.", ex: "Bsp: Gutachten einer Uni für neues Produkt.", link: "#" },
-        { state: "BE", name: "Digitalprämie Berlin", type: "💰 Zuschuss", rate: "50%", max: "17.000 €", desc: "Zuschuss für Digitalisierungsprojekte und IT-Beratung.", ex: "Bsp: Einführung von Cybersicherheits-Tools.", link: "#" },
+        { state: "BE", name: "Gründungsbonus Berlin", type: "💰 Zuschuss", rate: "50%", max: "50.000 €", desc: "Anschubfinanzierung für innovative Startups.", ex: "Bsp: Miete und Gehälter.", link: "https://www.ibb.de/de/foerderprogramme/gruendungsbonus-plus.html" },
+        { state: "BE", name: "Transfer BONUS Berlin", type: "💰 Zuschuss", rate: "70%", max: "45.000 €", desc: "Wissenstransfer zwischen Hochschulen und Wirtschaft.", ex: "Bsp: Gutachten einer Uni.", link: "https://www.ibb.de/de/foerderprogramme/transfer-bonus.html" },
 
         // NIEDERSACHSEN (NI)
-        { state: "NI", name: "Digitalbonus Niedersachsen", type: "💰 Zuschuss", rate: "40%", max: "10.000 €", desc: "Investitionen in digitale Sicherheit und IT-Infrastruktur.", ex: "Bsp: Neue Server-Hardware.", link: "https://www.nbank.de" }
+        { state: "NI", name: "Innovationsförderprogramm für Forschung und Entwicklung in Unternehmen (IFP)", type: "💰 Zuschuss", rate: "45%", max: "500.000 €", desc: "Investitions- und Kooperationsvorhaben.", ex: "Bsp: Entwicklung eines neuen Produktes.", link: "https://www.nbank.de/F%C3%B6rderprogramme/Aktuelle-F%C3%B6rderprogramme/Innovationsf%C3%B6rderprogramm-f%C3%BCr-Forschung-und-Entwicklung-in-Unternehmen-(IFP).html#neuerfoerderschwerpunktinniedersachsen" }
     ];
 
     function filter(state, btn) {
